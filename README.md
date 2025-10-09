@@ -30,46 +30,40 @@ TAS provides:
 
 ## Quick Start
 
-To get TAS running in 5 minutes we recommend using a python virtual environment:
+To get TAS running in a few minutes we recommend using the quickstart shell script:
 
 ```bash
-# 1. Clone and setup
+# Clone and setup
 git clone https://github.com/TEE-Attestation/TAS
 cd tas
-# Install SNP tools (required for AMD SEV-SNP support)
-python -m venv venv
-source venv/bin/activate
-
-# 2. Install dependencies
-git clone https://github.com/TEE-Attestation/snp_pytools.git
-cd snp_pytools
-pip install .
-cd ..
-pip install -r requirements.txt
-
-# 3. Start Redis (required)
-redis-server &
-
-# 4. Set environment variables
-export TAS_API_KEY="your-64-character-api-key-here-make-it-secure-and-long-enough"
-export TAS_KBM_PLUGIN="tas_kbm_mock"  # Use mock plugin for testing
-
-# 5. Create and sign TAS policy
-cd certs/policy/
-# Using demo signer with auto-generated keys. To generate your own keys, refer https://github.com/TEE-Attestation/tas/blob/main/docs/POLICY.md
-python3 demo_signer.py ./example_policy.json
-# Add signature to your policy
-jq -s '.[0] * .[1]' example_policy.json example_policy.json.sig > example_policy_signed.json
-cd ../..
-
-# 6. Run TAS
-python app.py
+chmod +x quickstart.sh
+./quickstart.sh demo
 ```
+That's it! The script will:
 
-TAS will be available at `http://localhost:5000`. See [API Documentation](#api-documentation) for available endpoints.
+- Check and install all dependencies
+- Set up the Python environment
+- Configure TAS with mock secrets
+- Start the TAS server in background
+- Run automated tests to verify everything works
+TAS will be running at http://localhost:5000 after the demo completes.
 
-## Prerequisites
+###Quickstart Commands:
 
+```bash
+# Complete demo (install + start + test)
+./quickstart.sh demo
+
+# Individual commands
+./quickstart.sh install      # One-time setup
+./quickstart.sh start        # Start TAS server
+./quickstart.sh test         # Run tests
+./quickstart.sh exit         # Stop TAS server
+./quickstart.sh uninstall    # Clean up installation
+
+# Get help
+./quickstart.sh help
+```
 
 ### Required Software
 

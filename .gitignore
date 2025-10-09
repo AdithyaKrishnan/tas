@@ -142,8 +142,6 @@ env.bak/
 venv.bak/
 venv-*
 
-
-
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -190,3 +188,6 @@ cython_debug/
 
 # tas log files
 tas.log
+
+# tas pid
+.tas.pid
